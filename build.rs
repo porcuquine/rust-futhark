@@ -1,16 +1,17 @@
-extern crate cc;
 extern crate bindgen;
+extern crate cc;
 
 use std::path::PathBuf;
 use std::process::Command;
 
 fn main() {
-    let _ = Command::new("futhark-c")
-            .arg("--library")
-            .arg("./dotprod.fut")
-            .output()
-            .expect("failed to execute process");
-    
+    let _ = Command::new("futhark")
+        .arg("c")
+        .arg("--library")
+        .arg("./dotprod.fut")
+        .output()
+        .expect("failed to execute process");
+
     let bindings = bindgen::Builder::default()
         .header("dotprod.h")
         .generate()
